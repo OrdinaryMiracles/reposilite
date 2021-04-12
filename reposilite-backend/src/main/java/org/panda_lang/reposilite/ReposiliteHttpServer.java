@@ -35,6 +35,7 @@ import org.panda_lang.reposilite.error.FailureHandler;
 import org.panda_lang.reposilite.repository.DeployEndpoint;
 import org.panda_lang.reposilite.repository.LookupApiEndpoint;
 import org.panda_lang.reposilite.repository.LookupController;
+import org.panda_lang.reposilite.resource.FrontendFileHandler;
 import org.panda_lang.reposilite.resource.FrontendHandler;
 import org.panda_lang.reposilite.resource.WebJarsHandler;
 import org.panda_lang.reposilite.utils.FilesUtils;
@@ -78,6 +79,8 @@ public final class ReposiliteHttpServer {
                 .before(ctx -> reposilite.getStatsService().record(ctx.req.getRequestURI()))
                 .get("/webjars/*", new WebJarsHandler())
                 .get("/js/app.js", new FrontendHandler(reposilite))
+                .get("/css/font.css", new FrontendFileHandler())
+                .get("/js/all.min.js", new FrontendFileHandler())
                 .get("/api/auth", new AuthEndpoint(reposilite.getAuthService()))
                 .post("/api/execute", new RemoteExecutionEndpoint(reposilite.getAuthenticator(), reposilite.getContextFactory(), reposilite.getConsole()))
                 .ws("/api/cli", cliController)
