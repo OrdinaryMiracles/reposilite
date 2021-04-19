@@ -100,8 +100,8 @@ public final class ProxyService {
                 try {
                     HttpRequest remoteRequest = httpRequestFactory.buildGetRequest(new GenericUrl(proxied + remoteUri));
                     remoteRequest.setThrowExceptionOnExecuteError(false);
-                    remoteRequest.setConnectTimeout(3000);
-                    remoteRequest.setReadTimeout(10000);
+                    remoteRequest.setConnectTimeout(30000);
+                    remoteRequest.setReadTimeout(100000);
                     HttpResponse remoteResponse = remoteRequest.execute();
 
                     if (!remoteResponse.isSuccessStatusCode()) {
